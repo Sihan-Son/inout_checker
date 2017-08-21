@@ -30,8 +30,8 @@ int getDistance(char TRIG, char ECHO)
 	digitalWrite(TRIG, HIGH);
 	delay(10);
 	digitalWrite(TRIG, LOW);
-	int  distance = pulseIn(ECHO, HIGH) / 58.2;
-
+	int  duration = pulseIn(ECHO, HIGH);
+	int distance = duration / 58.2;
 	return distance;
 }
 
@@ -50,7 +50,7 @@ void loop()
 		status = 2;//out
 		Serial.println("Status >> out\n");
 
-		if (inMan <= 0);
+		if (inMan == 0);
 			status = 3;
 	}
 
@@ -60,11 +60,12 @@ void loop()
 	{
 	case 1:
 	{
-		//delay(500);
+		Dis_out = getDistance(TRIG_2, ECHO_2);
+
 		if (Dis_out < 20)
 		{
-			people += 1;
-			inMan += 1;
+			people++;
+			inMan++;
 
 			Serial.print("Dis_in >> ");
 			Serial.println(Dis_in);
@@ -90,10 +91,12 @@ void loop()
 
 	case 2:
 	{
-		//delay(500);
+	
+		Dis_in = getDistance(TRIG_1, ECHO_1);
+
 		if (Dis_in < 20)
 		{
-			inMan -= 1;
+			inMan--;
 
 			Serial.print("Dis_in >> ");
 			Serial.println(Dis_in);
@@ -120,78 +123,5 @@ void loop()
 		break;
 	}
 
-	/*
-	Serial.println("====================================================");
-	Serial.print("Dis_in >> ");
-	Serial.println(Dis_in);
-	Serial.println();
-
-	Serial.print("Dis_out >> ");
-	Serial.println(Dis_out);
-	Serial.println();
-	Serial.println("====================================================");
-	*/
-	/*
-	if (Dis_in < 20)
-	{
-		if (Dis_out< 20)
-		{
-			people += 1;
-			inMan += 1;
-
-			Serial.print("Dis_in >> ");
-			Serial.println(Dis_in);
-
-			Serial.print("Dis_out >> ");
-			Serial.println(Dis_out);
-			Serial.println();
-
-			Serial.print("Now in Room >> ");
-			Serial.println(inMan);
-
-			Serial.print("All People >> ");
-			Serial.println(people);
-			Serial.println();
-
-			Serial.println("Someone is in");
-			Serial.println();
-			Serial.println("///////////////////////////////////////////////////");
-
-		}
-	}
-
-	//delay(500);
-
-	else if (Dis_out< 20)
-	{
-		if (Dis_in < 20)
-		{
-			inMan -= 1;
-
-			Serial.print("Dis_in >> ");
-			Serial.println(Dis_in);
-
-			Serial.print("Dis_out >> ");
-			Serial.println(Dis_out);
-			Serial.println();
-
-			Serial.print("Now in Room >> ");
-			Serial.println(inMan);
-
-			Serial.print("All People >> ");
-			Serial.println(people);
-			Serial.println();
-
-			Serial.println("Someone is out");
-			Serial.println();
-			Serial.println("///////////////////////////////////////////////////");
-
-
-		}
-	}
-	*/
-
-
-	
 
 }

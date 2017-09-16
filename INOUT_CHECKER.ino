@@ -1,16 +1,19 @@
+#include <DHT11.h>
 
+#define pin 2
 #define TRIG_1 3
 #define ECHO_1 4
 
 #define TRIG_2 5
 #define ECHO_2 6
 
+DHT11 dht11(pin);
 int Dis_in;
 int Dis_out;
 int status;
 
-unsigned people = 0; // �� �ο�
-unsigned inMan = 0; //�� �ο�
+unsigned people = 0; // �� �ο�
+unsigned inMan = 0; //�� �ο�
 
 
 
@@ -37,6 +40,26 @@ int getDistance(char TRIG, char ECHO)
 
 void loop() 
 {
+
+  int err;
+  float temp, humi;
+  if((err=dht11.read(humi, temp))==0) //온도, 습도 읽어와서 표시
+  {
+    Serial.print("temperature:");
+    Serial.print(temp);
+    Serial.print(" humidity:");
+    Serial.print(humi);
+    Serial.println();
+  }
+  else                                //에러일 경우 처리
+  {
+    Serial.println();
+    Serial.print("Error No :");
+    Serial.print(err);
+    Serial.println();    
+  }
+  delay(1000);                        //1초마다 측정
+  
 	Dis_in = getDistance(TRIG_1, ECHO_1);
 	Dis_out = getDistance(TRIG_2, ECHO_2);
 

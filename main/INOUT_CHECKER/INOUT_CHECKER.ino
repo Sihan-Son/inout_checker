@@ -7,6 +7,8 @@
 #define TRIG_2 5
 #define ECHO_2 6
 
+#define LED 13
+
 DHT11 dht11(pin);
 int Dis_in;
 int Dis_out;
@@ -23,6 +25,7 @@ void setup()
 	pinMode(TRIG_2, OUTPUT);
 	pinMode(ECHO_1, INPUT);
 	pinMode(ECHO_2, INPUT);
+  pinMode(LED, OUTPUT);
 	
 	Serial.begin(9600);
 }
@@ -107,6 +110,10 @@ void loop()
 			Serial.println("Someone is in");
 			Serial.println();
 			Serial.println("///////////////////////////////////////////////////");
+
+      digitalWrite(LED, HIGH);
+      delay(500);
+      digitalWrite(LED, LOW);
 		}
 		break;
 

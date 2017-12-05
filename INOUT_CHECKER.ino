@@ -12,8 +12,8 @@ int Dis_in;
 int Dis_out;
 int status;
 
-unsigned people = 0; // �� �ο�
-unsigned inMan = 0; //�� �ο�
+unsigned people = 0; 
+unsigned inMan = 0; 
 
 
 
@@ -60,6 +60,7 @@ void loop()
   }
   delay(1000);                        //1초마다 측정
   
+
 	Dis_in = getDistance(TRIG_1, ECHO_1);
 	Dis_out = getDistance(TRIG_2, ECHO_2);
 
